@@ -43,4 +43,3 @@ Locate the first failing boundary before changing configuration. Prefer current 
 ## Completion standard
 
 Finish with: failing boundary, supporting evidence, uncertainty, lowest-risk next action, rollback or stop condition, and any facts that still require official verification.
-

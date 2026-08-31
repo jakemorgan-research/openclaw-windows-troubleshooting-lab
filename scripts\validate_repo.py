@@ -41,7 +41,11 @@ def main() -> int:
         ROOT / "README.md",
         ROOT / "LICENSE",
         ROOT / "SECURITY.md",
-        ROOT / "skills" / "openclaw-windows-troubleshooter" / "SKILL.md",
+        ROOT / "SKILL.md",
+        ROOT / "agents" / "openai.yaml",
+        ROOT / "references" / "triage.md",
+        ROOT / "scripts" / "collect_openclaw_diagnostics.ps1",
+        ROOT / "examples" / "sanitized-case-report.md",
     ]
     for path in required:
         if not path.exists():
@@ -58,4 +62,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

@@ -38,4 +38,3 @@ User request
 ## Stop conditions
 
 Stop destructive troubleshooting when the next step would change ACLs, secrets, firewall exposure, account state, or system security policy. Document the evidence and escalate to the relevant official issue or support channel.
-

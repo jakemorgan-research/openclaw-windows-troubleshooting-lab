@@ -24,7 +24,7 @@ jobs:
           import re
           import sys
 
-          path = Path('skills/openclaw-windows-troubleshooter/SKILL.md')
+          path = Path('SKILL.md')
           text = path.read_text(encoding='utf-8')
           ok = text.startswith('---\n') and re.search(r'^name: openclaw-windows-troubleshooter$', text, re.M) and re.search(r'^description: .+', text, re.M)
           if not ok:
@@ -33,3 +33,10 @@ jobs:
           print('Skill frontmatter validation passed')
           PY
 
+  powershell-redaction:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Redaction self-test
+        shell: pwsh
+        run: ./scripts/collect_openclaw_diagnostics.ps1 -SelfTest

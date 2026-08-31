@@ -27,4 +27,3 @@ lightweight node calls work while process execution fails
 ## Historical lesson
 
 A prior sanitized case showed a useful diagnostic pattern: device/canvas calls returned normally while `system.run` stalled during Windows sandbox initialization. That pattern localized the problem to execution rather than pairing. It does not prove every current `system.run` failure has the same cause.
-

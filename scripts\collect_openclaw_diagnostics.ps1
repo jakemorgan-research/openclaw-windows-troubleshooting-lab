@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
-    [string]$OutputPath = "openclaw-diagnostics-sanitized.txt"
+    [string]$OutputPath = "openclaw-diagnostics-sanitized.txt",
+    [switch]$SelfTest
 )
 
 $ErrorActionPreference = "Continue"
@@ -14,10 +15,37 @@ function Protect-Text {
     if ($env:COMPUTERNAME) { $safe = $safe.Replace($env:COMPUTERNAME, "<host>") }
     $safe = $safe -replace '(?i)C:\\Users\\[^\\\s]+', 'C:\Users\<user>'
     $safe = $safe -replace '(?i)/home/[^/\s]+', '/home/<user>'
+    $safe = $safe -replace '(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b', '<email>'
+    $safe = $safe -replace '(?i)https?://[^\s"''<>]+', '<url>'
     $safe = $safe -replace '\b(?:\d{1,3}\.){3}\d{1,3}\b', '<ip>'
+    $safe = $safe -replace '(?i)\b(?:[0-9A-F]{2}[:-]){5}[0-9A-F]{2}\b', '<mac>'
+    $safe = $safe -replace '(?i)\b[0-9A-F]{8}-[0-9A-F]{4}-[1-5][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}\b', '<uuid>'
+    $safe = $safe -replace '(?i)\bBearer\s+[A-Za-z0-9._~+/-]+=*', 'Bearer <redacted>'
     $safe = $safe -replace '(?im)^.*(?:token|secret|password|api[_-]?key).*$', '<redacted-sensitive-line>'
     $safe = $safe -replace '\b\d{8,}\b', '<numeric-id>'
     return $safe
+}
+
+if ($SelfTest) {
+    $testEmail = 'person' + '@' + 'example.com'
+    $testUser = 'sample' + '-user'
+    $testPath = 'C:\' + 'Users\' + $testUser + '\private'
+    $testIp = @('192', '0', '2', '10') -join '.'
+    $testToken = 'example-value-' + 'with-length'
+    $testId = '12345' + '67890'
+    $sample = 'account=' + $testEmail + "`n" +
+        'path=' + $testPath + "`n" +
+        'endpoint=https://' + 'private.invalid/path' + "`n" +
+        'address=' + $testIp + "`n" +
+        'authorization=Bearer ' + $testToken + "`n" +
+        'session=' + $testId
+    $sanitized = Protect-Text $sample
+    $forbidden = @($testEmail, $testUser, 'private.invalid', $testIp, $testToken, $testId)
+    foreach ($value in $forbidden) {
+        if ($sanitized.Contains($value)) { throw "Redaction self-test failed." }
+    }
+    Write-Output 'Redaction self-test passed.'
+    exit 0
 }
 
 $commands = @(
@@ -43,6 +71,5 @@ if (-not (Get-Command openclaw -ErrorAction SilentlyContinue)) {
 
 $result = $sections -join "`n"
 Set-Content -LiteralPath $OutputPath -Value $result -Encoding utf8
-Write-Output "Wrote sanitized diagnostics to $OutputPath"
+Write-Output 'Wrote sanitized diagnostics file.'
 Write-Warning 'Review the file manually before sharing. Automated redaction is not a guarantee.'
-

@@ -18,4 +18,3 @@ Contributions should make one failing boundary easier to identify or one diagnos
 - Run `python scripts/validate_repo.py` and the skill validator.
 
 Do not submit real credentials for testing. Maintainers will close or redact unsafe reports rather than diagnose them publicly.
-

@@ -5,4 +5,3 @@ Do not open a public issue containing credentials, bot tokens, account identifie
 If a credential has been exposed, revoke or rotate it through the provider's official process. Deleting a comment or commit is not sufficient because copies may remain in history, caches, forks, or notifications.
 
 Until a private reporting channel is configured, report only a minimal non-sensitive description and ask the maintainer where to continue privately.
-

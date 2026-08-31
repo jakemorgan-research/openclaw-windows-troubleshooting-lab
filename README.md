@@ -24,26 +24,33 @@ The included `openclaw-windows-troubleshooter` skill helps developers and beginn
 
 ## Start in five minutes
 
-1. Open [`skills/openclaw-windows-troubleshooter/SKILL.md`](skills/openclaw-windows-troubleshooter/SKILL.md).
-2. Follow the first-pass boundary map in [`references/triage.md`](skills/openclaw-windows-troubleshooter/references/triage.md).
+1. Install the Skill from this repository:
+
+   ```powershell
+   openclaw skills install git:jakemorgan-research/openclaw-windows-troubleshooting-lab@main
+   ```
+
+   The repository is private during review, so Git must already have access. You can also install a checked-out copy with `openclaw skills install .`.
+
+2. Open [`SKILL.md`](SKILL.md) and follow the [first-pass boundary map](references/triage.md).
 3. On Windows, optionally run the read-only collector:
 
    ```powershell
-   .\skills\openclaw-windows-troubleshooter\scripts\collect_openclaw_diagnostics.ps1
+   .\scripts\collect_openclaw_diagnostics.ps1
    ```
 
 4. Manually review the generated file before sharing it.
-5. Use the [sanitized case template](skills/openclaw-windows-troubleshooter/references/case-report.md) for an issue or discussion.
+5. Compare the [filled sanitized example](examples/sanitized-case-report.md), then use the [case template](references/case-report.md) for an issue or discussion.
 
 ## Pick your symptom
 
 | Symptom | Start here |
 |---|---|
-| Gateway is offline or dashboard disconnects | [First-pass triage](skills/openclaw-windows-troubleshooter/references/triage.md) |
-| Command runs in Linux instead of Windows | [Gateway and Windows Node](skills/openclaw-windows-troubleshooter/references/gateway-node.md) |
-| `system.run` times out or mentions sandbox/DACL | [Windows sandbox](skills/openclaw-windows-troubleshooter/references/windows-sandbox.md) |
-| WSL cannot reliably reach the proxy/service | [WSL networking](skills/openclaw-windows-troubleshooter/references/wsl-network.md) |
-| Telegram sends but the phone does not notify | [Telegram delivery](skills/openclaw-windows-troubleshooter/references/telegram-delivery.md) |
+| Gateway is offline or dashboard disconnects | [First-pass triage](references/triage.md) |
+| Command runs in Linux instead of Windows | [Gateway and Windows Node](references/gateway-node.md) |
+| `system.run` times out or mentions sandbox/DACL | [Windows sandbox](references/windows-sandbox.md) |
+| WSL cannot reliably reach the proxy/service | [WSL networking](references/wsl-network.md) |
+| Telegram sends but the phone does not notify | [Telegram delivery](references/telegram-delivery.md) |
 
 ## Repository boundary
 
@@ -65,7 +72,8 @@ Links were last checked on 2026-08-31. OpenClaw evolves quickly; prefer the curr
 
 ```text
 python scripts/validate_repo.py
-python <skill-creator>/scripts/quick_validate.py skills/openclaw-windows-troubleshooter
+python <skill-creator>/scripts/quick_validate.py .
+.\scripts\collect_openclaw_diagnostics.ps1 -SelfTest
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a reproduction. Security-sensitive reports belong in a private maintainer channel, not a public issue.
@@ -73,4 +81,3 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a reproduction. Securit
 ## License
 
 MIT. Documentation and examples are provided without warranty.
-

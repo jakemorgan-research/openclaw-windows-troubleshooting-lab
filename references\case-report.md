@@ -35,4 +35,3 @@ One reversible step and the expected result for each branch.
 - [ ] no public/private IPs or proxy endpoints
 - [ ] no private message content
 ```
-

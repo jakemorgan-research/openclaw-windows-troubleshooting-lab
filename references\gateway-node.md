@@ -23,4 +23,3 @@ Agent exec request
 Never infer incompatibility solely because Gateway and companion components use different-looking version numbers. Confirm compatibility in current official release notes or reproduce the boundary failure.
 
 Official node behavior changes over time. When a historical case and current documentation disagree, label the old case as historical and follow the current documentation.
-

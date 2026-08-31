@@ -24,4 +24,3 @@ Compare a normal person-to-person Telegram message with the bot message while th
 ## Privacy
 
 Redact bot tokens, numeric chat/user IDs, message contents, proxy endpoints, public IPs, and device names. If a token was exposed, rotate it rather than merely deleting the screenshot.
-
