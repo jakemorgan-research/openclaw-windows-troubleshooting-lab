@@ -1,0 +1,35 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate repository
+        run: python scripts/validate_repo.py
+      - name: Validate skill
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          path = Path('skills/openclaw-windows-troubleshooter/SKILL.md')
+          text = path.read_text(encoding='utf-8')
+          ok = text.startswith('---\n') and re.search(r'^name: openclaw-windows-troubleshooter$', text, re.M) and re.search(r'^description: .+', text, re.M)
+          if not ok:
+              print('Skill frontmatter validation failed')
+              sys.exit(1)
+          print('Skill frontmatter validation passed')
+          PY
+

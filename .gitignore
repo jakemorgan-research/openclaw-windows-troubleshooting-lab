@@ -1,0 +1,11 @@
+openclaw-diagnostics*.txt
+*.log
+*.env
+.env*
+config*.json
+secrets/
+private/
+screenshots-private/
+__pycache__/
+*.pyc
+
