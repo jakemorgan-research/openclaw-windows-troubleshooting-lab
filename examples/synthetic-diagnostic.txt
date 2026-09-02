@@ -1,0 +1,6 @@
+Example: synthetic diagnostic excerpt
+Gateway: running
+Node capability: available
+Execution: caller timeout; downstream result unknown
+password: FAKE_DEMO_ONLY_NOT_A_CREDENTIAL
+Next: inspect the final result before retrying.

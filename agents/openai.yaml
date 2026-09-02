@@ -1,4 +1,4 @@
 interface:
   display_name: "OpenClaw Windows Troubleshooter"
   short_description: "Diagnose OpenClaw on Windows and WSL with evidence-first checks"
-  default_prompt: "Diagnose this OpenClaw Windows or WSL problem, separate the failing layer, and propose the lowest-risk next check."
+  default_prompt: "Use $openclaw-windows-troubleshooter to separate confirmed evidence from hypotheses and propose one low-risk comparison check."

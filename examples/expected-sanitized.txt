@@ -1,0 +1,6 @@
+Example: synthetic diagnostic excerpt
+Gateway: running
+Node capability: available
+Execution: caller timeout; downstream result unknown
+<redacted-sensitive-line>
+Next: inspect the final result before retrying.

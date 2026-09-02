@@ -1,43 +1,44 @@
 name: Validate
-
 on:
   push:
   pull_request:
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
-  validate:
+  offline:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.12"]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - name: Validate repository
-        run: python scripts/validate_repo.py
-      - name: Validate skill
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          import sys
+          python-version: ${{ matrix.python }}
+      - name: Privacy including reachable history
+        run: python scripts/validate_repo.py --history
+      - name: Documentation links and SVG structure
+        run: python scripts/check_docs.py
+      - name: Behavioral tests
+        run: python -m unittest discover -s tests -v
 
-          path = Path('SKILL.md')
-          text = path.read_text(encoding='utf-8')
-          ok = text.startswith('---\n') and re.search(r'^name: openclaw-windows-troubleshooter$', text, re.M) and re.search(r'^description: .+', text, re.M)
-          if not ok:
-              print('Skill frontmatter validation failed')
-              sys.exit(1)
-          print('Skill frontmatter validation passed')
-          PY
-
-  powershell-redaction:
+  powershell:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Redaction self-test
+      - name: Windows PowerShell self-test
+        shell: powershell
+        run: ./scripts/collect_openclaw_diagnostics.ps1 -SelfTest
+      - name: PowerShell 7 self-test
         shell: pwsh
         run: ./scripts/collect_openclaw_diagnostics.ps1 -SelfTest
+      - name: Worked example output
+        shell: pwsh
+        run: |
+          ./scripts/collect_openclaw_diagnostics.ps1 -InputPath examples/synthetic-diagnostic.txt -OutputPath openclaw-diagnostics-ci.txt
+          $actual = (Get-Content openclaw-diagnostics-ci.txt -Raw).Trim()
+          $expected = (Get-Content examples/expected-sanitized.txt -Raw).Trim()
+          if ($actual -ne $expected) { throw 'Synthetic example output differs.' }

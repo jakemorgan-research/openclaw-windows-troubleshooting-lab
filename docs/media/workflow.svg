@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="310" viewBox="0 0 1200 310" role="img" aria-labelledby="title desc">
+<title id="title">Evidence before repair</title>
+<desc id="desc">Client to Gateway to node or channel to result. Stop at the first failed boundary; a timeout is not proof of downstream failure.</desc>
+<rect width="1200" height="310" rx="20" fill="#f0f6fa"/>
+<g font-family="Segoe UI,Arial,sans-serif">
+<text x="38" y="50" font-size="26" font-weight="700" fill="#102c43">Evidence before repair</text>
+<rect x="38" y="83" width="248" height="113" rx="14" fill="#fff" stroke="#c8d9e3"/><text x="58" y="126" font-size="22" font-weight="600" fill="#102c43">Client</text><text x="58" y="162" font-size="17" fill="#425c6c">Request accepted?</text><path d="M 293 139 h 22 l -6 -5 m 6 5 l -6 5" fill="none" stroke="#147d73" stroke-width="3"/>
+<rect x="331" y="83" width="248" height="113" rx="14" fill="#fff" stroke="#c8d9e3"/><text x="351" y="126" font-size="22" font-weight="600" fill="#102c43">Gateway</text><text x="351" y="162" font-size="17" fill="#425c6c">Service reachable?</text><path d="M 586 139 h 22 l -6 -5 m 6 5 l -6 5" fill="none" stroke="#147d73" stroke-width="3"/>
+<rect x="624" y="83" width="248" height="113" rx="14" fill="#d6f3eb" stroke="#c8d9e3"/><text x="644" y="126" font-size="22" font-weight="600" fill="#102c43">Node / channel</text><text x="644" y="162" font-size="17" fill="#425c6c">Capability approved?</text><path d="M 879 139 h 22 l -6 -5 m 6 5 l -6 5" fill="none" stroke="#147d73" stroke-width="3"/>
+<rect x="917" y="83" width="248" height="113" rx="14" fill="#fff" stroke="#c8d9e3"/><text x="937" y="126" font-size="22" font-weight="600" fill="#102c43">Result</text><text x="937" y="162" font-size="17" fill="#425c6c">Actually completed?</text>
+<text x="38" y="249" font-size="21" fill="#147d73">Observe → one comparison → bounded conclusion → manual privacy review</text>
+<text x="38" y="281" font-size="17" fill="#425c6c">Illustrative workflow • synthetic examples • no live-system evidence implied</text>
+</g></svg>

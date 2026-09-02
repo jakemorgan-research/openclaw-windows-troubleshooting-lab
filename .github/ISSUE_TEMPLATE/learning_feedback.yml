@@ -1,0 +1,28 @@
+name: Beginner feedback
+description: Tell us where the first-run guide became unclear.
+title: "[Docs] "
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Guide and step
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: What did you expect, and what happened?
+      description: "A short explanation is enough. Do not attach private output."
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+  - type: checkboxes
+    id: review
+    attributes:
+      label: Privacy
+      options:
+        - label: "No secrets, contact details, private identifiers, or account screenshots are included."
+          required: true

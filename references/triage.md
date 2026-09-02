@@ -1,40 +1,26 @@
 # First-pass triage
 
-Use the smallest command ladder that can distinguish lifecycle, routing, and channel failures:
+![Client, Gateway, node or channel, and result](../docs/media/workflow.svg)
 
-```text
-openclaw status
-openclaw gateway status
-openclaw logs --follow
-openclaw doctor
-openclaw channels status --probe
-```
+Start with the smallest relevant operator-run check, not an automatic repair ladder.
 
-Do not paste an entire log. Capture a short time window around one reproduced event, then redact it before sharing.
+| Question | Optional manual check | Meaning |
+| --- | --- | --- |
+| Is the CLI available? | `openclaw --version` | Installation visible in this shell |
+| Is the service reachable? | `openclaw gateway status` | Does not prove model or channel success |
+| Is the overall status healthy? | `openclaw status` | Inspect output privately |
+| Can the channel respond? | `openclaw channels status --probe` | Active network probe; run only when relevant |
 
-## Boundary map
+Commands depend on installed versions. The offline helper runs none of these.
 
-```text
-User request
-  -> client or channel
-  -> Gateway
-     -> local tool, OR
-     -> paired node, OR
-     -> external channel API
-  -> receiving application/device
-```
+`openclaw doctor` may enter diagnosis/repair workflows; it is not included in unattended collection. Inspect current help and obtain approval before repairs. Do not stream unlimited logs or paste full output.
 
-## Evidence table
+## Evidence boundaries
 
-| Observation | What it proves | What it does not prove |
-|---|---|---|
-| Gateway reports running | Service lifecycle is active | Model, node, or channel calls will succeed |
-| Node appears connected | Pairing and transport are present | `system.run` is approved or executable |
-| `device.status` succeeds | Node can answer a lightweight capability | Process execution is healthy |
-| Proxy TCP connect succeeds | Proxy listener is reachable | TLS and upstream routing are healthy |
-| Telegram returns a message ID | Bot API accepted the send | iOS displayed a lock-screen notification |
-| CLI times out | Caller stopped waiting | Downstream action definitely failed |
+A connected node does not prove process execution is approved. Proxy reachability does not prove upstream TLS is healthy. A Telegram send receipt does not prove the phone displayed a notification. A caller timeout does not prove a downstream action failed.
 
-## Stop conditions
+Use one controlled comparison and record both possible interpretations.
 
-Stop destructive troubleshooting when the next step would change ACLs, secrets, firewall exposure, account state, or system security policy. Document the evidence and escalate to the relevant official issue or support channel.
+## Stop
+
+Stop before changing credentials, ACLs, firewall exposure, sandbox rules, or account security. Consult current [OpenClaw troubleshooting](https://github.com/openclaw/openclaw/blob/main/docs/channels/troubleshooting.md) and the relevant platform guide.

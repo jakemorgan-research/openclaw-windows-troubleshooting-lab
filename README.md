@@ -1,83 +1,61 @@
-# OpenClaw Windows Troubleshooting Lab
+<p align="center"><img src="docs/media/hero.svg" alt="Windows troubleshooting: locate, compare, report safely" width="100%"></p>
+<p align="center"><strong>A focused skill, an offline redaction helper, and evidence-first troubleshooting recipes.</strong><br><sub>Private review · MIT · Python 3.9+ · PowerShell 5.1+ · Not affiliated with OpenClaw</sub></p>
 
-Evidence-first diagnostics for OpenClaw on Windows + WSL2.
+| New to OpenClaw? | Have a failure? | Build / contribute |
+| --- | --- | --- |
+| [中文五步入门](docs/GETTING_STARTED.zh-CN.md) | [Choose a boundary](references/triage.md) | [Developer guide](docs/DEVELOPER_GUIDE.md) |
 
-> Private preview. This repository is not affiliated with or endorsed by OpenClaw.
+<p align="center"><img src="docs/media/workflow.svg" alt="Client to Gateway to node or channel to final result; test the first failing boundary" width="100%"></p>
 
-## What this gives you
+## Try the tool without OpenClaw or credentials
 
-```text
-Symptom
-  -> identify the failing boundary
-  -> run one reversible comparison check
-  -> separate evidence from inference
-  -> produce a sanitized case report
+Run from the downloaded repository in PowerShell:
+
+```powershell
+./scripts/collect_openclaw_diagnostics.ps1 -SelfTest
+./scripts/collect_openclaw_diagnostics.ps1 -InputPath examples/synthetic-diagnostic.txt -OutputPath openclaw-diagnostics-demo.txt
 ```
 
-The included `openclaw-windows-troubleshooter` skill helps developers and beginners distinguish:
+Expected: self-test PASS, then a new sanitized file. Compare [the input and expected output](examples/README.md). The output is ignored by Git and never uploaded automatically.
 
-- Gateway lifecycle from model or channel failures
-- Gateway-to-node routing from Windows execution failures
-- WSL proxy reachability from upstream TLS instability
-- Telegram Bot API delivery from iPhone notification behavior
-- caller timeouts from confirmed downstream failures
-
-## Start in five minutes
-
-1. Install the Skill from this repository:
-
-   ```powershell
-   openclaw skills install git:jakemorgan-research/openclaw-windows-troubleshooting-lab@main
-   ```
-
-   The repository is private during review, so Git must already have access. You can also install a checked-out copy with `openclaw skills install .`.
-
-2. Open [`SKILL.md`](SKILL.md) and follow the [first-pass boundary map](references/triage.md).
-3. On Windows, optionally run the read-only collector:
-
-   ```powershell
-   .\scripts\collect_openclaw_diagnostics.ps1
-   ```
-
-4. Manually review the generated file before sharing it.
-5. Compare the [filled sanitized example](examples/sanitized-case-report.md), then use the [case template](references/case-report.md) for an issue or discussion.
+**The helper is now offline-only.** Despite its historical filename, it does not run OpenClaw, probe services, read configuration, or repair your system. It refuses to overwrite an existing output. Automatic redaction still needs human review.
 
 ## Pick your symptom
 
-| Symptom | Start here |
-|---|---|
-| Gateway is offline or dashboard disconnects | [First-pass triage](references/triage.md) |
-| Command runs in Linux instead of Windows | [Gateway and Windows Node](references/gateway-node.md) |
-| `system.run` times out or mentions sandbox/DACL | [Windows sandbox](references/windows-sandbox.md) |
-| WSL cannot reliably reach the proxy/service | [WSL networking](references/wsl-network.md) |
-| Telegram sends but the phone does not notify | [Telegram delivery](references/telegram-delivery.md) |
+| Symptom | Guide |
+| --- | --- |
+| Gateway offline or dashboard disconnecting | [First-pass triage](references/triage.md) |
+| A command runs on the wrong host | [Gateway and node routing](references/gateway-node.md) |
+| `system.run`, timeout, or DACL error | [Windows execution boundary](references/windows-sandbox.md) |
+| WSL can reach a proxy but requests still fail | [Network comparison](references/wsl-network.md) |
+| Telegram send succeeds but phone stays silent | [Delivery versus notification](references/telegram-delivery.md) |
 
-## Repository boundary
+## Install the companion skill
 
-This project deliberately excludes private configuration, raw logs, tokens, bot/chat IDs, machine names, usernames, contact details, proxy endpoints, local paths, screenshots of private dashboards, and third-party assets.
-
-Historical cases are rewritten as generalized diagnostic patterns. They are not presented as current universal bugs. Commands and configuration must be checked against current official documentation before use.
-
-## Official references
-
-- [OpenClaw channel troubleshooting](https://github.com/openclaw/openclaw/blob/main/docs/channels/troubleshooting.md)
-- [OpenClaw Telegram channel](https://github.com/openclaw/openclaw/blob/main/docs/channels/telegram.md)
-- [OpenClaw nodes](https://github.com/openclaw/openclaw/blob/main/docs/nodes/index.md)
-- [OpenClaw skills](https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md)
-- [Windows Node Gateway/exec FAQ](https://github.com/openclaw/openclaw-windows-node/blob/main/docs/OPENCLAW_GATEWAY_NODE_EXEC_FAQ.md)
-
-Links were last checked on 2026-08-31. OpenClaw evolves quickly; prefer the current upstream default branch and releases.
-
-## Development
+Review [SKILL.md](SKILL.md), then:
 
 ```text
-python scripts/validate_repo.py
-python <skill-creator>/scripts/quick_validate.py .
-.\scripts\collect_openclaw_diagnostics.ps1 -SelfTest
+openclaw skills install git:jakemorgan-research/openclaw-windows-troubleshooting-lab@main
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a reproduction. Security-sensitive reports belong in a private maintainer channel, not a public issue.
+Private access is required. A checked-out copy supports `openclaw skills install .`. Use a reviewed commit instead of `main` for reproducibility; reinstall Git sources to update. [Official installation guide](https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md#installing-from-clawhub).
 
-## License
+Try asking:
 
-MIT. Documentation and examples are provided without warranty.
+> Find the first failing boundary in this sanitized case. Separate confirmed evidence from hypotheses; propose one comparison check without modifying my system.
+
+<details>
+<summary><strong>What you get at the end</strong></summary>
+
+A small report with symptom, boundary, expected/observed results, evidence strength, one next check, and a stop condition. See the [worked synthetic case](examples/sanitized-case-report.md) and [blank template](references/case-report.md).
+
+The helper writes a local redacted text copy, not a diagnosis or a guaranteed-safe public report.
+</details>
+
+<details>
+<summary><strong>Privacy, tests, and feedback</strong></summary>
+
+Do not commit raw logs, private configuration, tokens, contacts, machine names, IPs, session IDs, original project files, or account screenshots. Synthetic examples are not records from a real user device.
+
+[Verification status](docs/VERIFICATION.md) · [Developer guide](docs/DEVELOPER_GUIDE.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [License](LICENSE)
+</details>

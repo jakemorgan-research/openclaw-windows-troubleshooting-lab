@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="350" viewBox="0 0 1200 350" role="img" aria-labelledby="title desc">
+<title id="title">Windows Troubleshooting Lab</title>
+<desc id="desc">Find the failing boundary, compare evidence, and share a sanitized report.</desc>
+<rect width="1200" height="350" rx="24" fill="#102c43"/>
+<circle cx="1110" cy="60" r="180" fill="#183c54"/>
+<text x="56" y="65" font-family="Segoe UI,Arial,sans-serif" font-size="18" letter-spacing="3" fill="#7fe0cd">OPENCLAW / COMMUNITY TOOLKIT</text>
+<text x="56" y="135" font-family="Segoe UI,Arial,sans-serif" font-size="46" font-weight="700" fill="#fff">Windows Troubleshooting Lab</text>
+<text x="58" y="181" font-family="Segoe UI,Arial,sans-serif" font-size="22" fill="#c6d9e5">Find the boundary. Preserve the evidence.</text>
+<rect x="56" y="227" width="300" height="64" rx="12" fill="#184d58"/>
+<rect x="378" y="227" width="342" height="64" rx="12" fill="#184d58"/>
+<rect x="742" y="227" width="400" height="64" rx="12" fill="#184d58"/>
+<g font-family="Segoe UI,Arial,sans-serif" font-size="21" fill="#fff">
+<text x="78" y="266">01  Locate</text>
+<text x="402" y="266">02  Compare</text>
+<text x="767" y="266">03  Report safely</text>
+</g></svg>

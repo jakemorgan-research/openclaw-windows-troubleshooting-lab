@@ -1,0 +1,37 @@
+name: Reproducible problem
+description: Report one sanitized, reproducible failure.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Use synthetic data only. No raw logs, tokens, personal contacts, device IDs, private paths, or screenshots of accounts."
+  - type: input
+    id: environment
+    attributes:
+      label: Versions and platform
+      description: "Version numbers and OS family only; no machine or account names."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Minimal reproduction
+      description: "Commands or action names with identifiers replaced by generic labels."
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected vs observed
+      description: "Separate actual results from assumptions. Include the local test result."
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Before submitting
+      options:
+        - label: "I checked the text and attachments for secrets and identifying information."
+          required: true
+        - label: "I understand local validation does not prove live integration."
+          required: true

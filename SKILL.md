@@ -38,7 +38,7 @@ Locate the first failing boundary before changing configuration. Prefer current 
 - For Gateway and Windows Node routing, read [references/gateway-node.md](references/gateway-node.md).
 - For `system.run`, ProcessContainer, or DACL symptoms, read [references/windows-sandbox.md](references/windows-sandbox.md).
 - For Telegram delivery versus iOS notification symptoms, read [references/telegram-delivery.md](references/telegram-delivery.md).
-- To prepare a shareable case, run `scripts/collect_openclaw_diagnostics.ps1`, inspect the result manually, and use [references/case-report.md](references/case-report.md).
+- To prepare a shareable case, use the offline helper with an explicitly selected short UTF-8 text file: `scripts/collect_openclaw_diagnostics.ps1 -InputPath <input> -OutputPath <new-output>`. It does not collect live data or guarantee complete redaction. Inspect the result manually and use [references/case-report.md](references/case-report.md).
 
 ## Completion standard
 
