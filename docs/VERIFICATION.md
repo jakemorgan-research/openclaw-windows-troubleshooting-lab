@@ -2,7 +2,7 @@
 
 Review date: 2026-09-02. Status: private development, no Release.
 
-Local review: 7 Python test methods passed; self-tests passed in Windows PowerShell 5.1 and PowerShell 7; the generated synthetic output matched the expected fixture. Both original SVG diagrams were rendered and visually inspected. Skill frontmatter and workflow/issue YAML parsed successfully. Repository and local reachable-history privacy scans reported no configured matches. These are local checks; inspect the current GitHub Actions run for remote CI evidence.
+Local review: 8 Python test methods passed; self-tests passed in Windows PowerShell 5.1 and PowerShell 7; the generated synthetic output matched the expected fixture. Both original SVG diagrams were rendered and visually inspected. Skill frontmatter and workflow/issue YAML parsed successfully. Repository and local reachable-history privacy scans reported no configured matches. These are local checks; inspect the current GitHub Actions run for remote CI evidence.
 
 | Layer | Evidence / limit |
 | --- | --- |

@@ -39,6 +39,6 @@ jobs:
         shell: pwsh
         run: |
           ./scripts/collect_openclaw_diagnostics.ps1 -InputPath examples/synthetic-diagnostic.txt -OutputPath openclaw-diagnostics-ci.txt
-          $actual = (Get-Content openclaw-diagnostics-ci.txt -Raw).Trim()
-          $expected = (Get-Content examples/expected-sanitized.txt -Raw).Trim()
+          $actual = (Get-Content openclaw-diagnostics-ci.txt -Raw).Replace("`r`n", "`n").Trim()
+          $expected = (Get-Content examples/expected-sanitized.txt -Raw).Replace("`r`n", "`n").Trim()
           if ($actual -ne $expected) { throw 'Synthetic example output differs.' }

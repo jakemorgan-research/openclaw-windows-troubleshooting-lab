@@ -42,6 +42,16 @@ def git(root, *args):
                                    stderr=subprocess.DEVNULL)
 
 
+def scan_metadata(text):
+    # GitHub's numeric+login noreply local part is an account ID, not a phone.
+    # Exempt only a whole email field in this exact non-deliverable format.
+    lines = text.splitlines()
+    safe = ["<github-noreply>" if re.fullmatch(
+        r"[0-9]+\+[A-Za-z0-9-]+@users\.noreply\.github\.com", line
+    ) else line for line in lines]
+    return scan_text("\n".join(safe), "commit-metadata")
+
+
 def scan_history(root):
     errors = []
     # Scan every reachable blob once, including deleted text and earlier versions.
@@ -59,7 +69,7 @@ def scan_history(root):
             continue
         errors.extend(scan_text(text, "history:" + sha[:8]))
     metadata = git(root, "log", "--all", "--format=%an%n%ae%n%cn%n%ce%n%B").decode("utf-8", "replace")
-    errors.extend(scan_text(metadata, "commit-metadata"))
+    errors.extend(scan_metadata(metadata))
     return errors
 
 

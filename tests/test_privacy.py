@@ -2,10 +2,17 @@ from pathlib import Path
 import sys
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from validate_repo import scan_text
+from validate_repo import scan_text, scan_metadata
 
 
 class PrivacyTests(unittest.TestCase):
+    def test_github_noreply_id_is_not_a_phone(self):
+        account_id = "12345" + "67890"
+        email = account_id + "+contributor" + "@" + "users.noreply.github.com"
+        self.assertEqual(scan_metadata(email), [])
+        self.assertTrue(scan_metadata(account_id))
+        self.assertTrue(scan_metadata(account_id + "+contributor" + "@" + "private.invalid"))
+
     def test_contacts_paths_and_tokens_detected_without_echo(self):
         fixtures = [
             "person" + "@" + "private.invalid",

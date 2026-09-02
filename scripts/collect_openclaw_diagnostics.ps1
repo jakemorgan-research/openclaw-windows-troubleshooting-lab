@@ -12,7 +12,7 @@ $MaxInputBytes = 1048576
 function Protect-Text {
     param([string]$Text)
     if ($null -eq $Text) { return "" }
-    $safe = $Text
+    $safe = $Text.Replace("`r`n", "`n")
     $safe = $safe -replace '(?i)[A-Z]:\\Users\\[^\\\s]+', '<user-path>'
     $safe = $safe -replace '(?i)/(?:home|Users)/[^/\s]+', '<user-path>'
     foreach ($identity in @($env:USERNAME, $env:COMPUTERNAME)) {
@@ -61,6 +61,10 @@ if ($SelfTest) {
     }
     if ((Protect-Text 'Gateway running; result pending.') -ne 'Gateway running; result pending.') {
         throw "Benign text was changed."
+    }
+    $lineSample = "Gateway running.`r`npassword: FAKE_DEMO_ONLY_NOT_A_CREDENTIAL`r`nEnd."
+    if ((Protect-Text $lineSample) -ne "Gateway running.`n<redacted-sensitive-line>`nEnd.") {
+        throw "Cross-platform newline test failed."
     }
     $tempRoot = Join-Path ([IO.Path]::GetTempPath()) ('openclaw-helper-test-' + [guid]::NewGuid().ToString('N'))
     [void][IO.Directory]::CreateDirectory($tempRoot)
