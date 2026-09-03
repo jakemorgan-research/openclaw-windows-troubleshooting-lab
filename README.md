@@ -1,5 +1,5 @@
 <p align="center"><img src="docs/media/hero.svg" alt="Windows troubleshooting: locate, compare, report safely" width="100%"></p>
-<p align="center"><strong>A focused skill, an offline redaction helper, and evidence-first troubleshooting recipes.</strong><br><sub>Private review · MIT · Python 3.9+ · PowerShell 5.1+ · Not affiliated with OpenClaw</sub></p>
+<p align="center"><strong>A focused skill, an offline redaction helper, and evidence-first troubleshooting recipes.</strong><br><sub>Experimental toolkit · MIT · Python 3.9+ · PowerShell 5.1+ · Tested with OpenClaw 2026.8.2 · Not affiliated with OpenClaw</sub></p>
 
 | New to OpenClaw? | Have a failure? | Build / contribute |
 | --- | --- | --- |
@@ -38,7 +38,7 @@ Review [SKILL.md](SKILL.md), then:
 openclaw skills install git:jakemorgan-research/openclaw-windows-troubleshooting-lab@main
 ```
 
-Private access is required. A checked-out copy supports `openclaw skills install .`. Use a reviewed commit instead of `main` for reproducibility; reinstall Git sources to update. [Official installation guide](https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md#installing-from-clawhub).
+If the repository is private, access permission is required. A checked-out copy supports `openclaw skills install .`; local managed installation and discovery were [tested in isolation](docs/ACCEPTANCE.md). Use a reviewed commit instead of `main` for reproducibility; reinstall Git sources to update. [Official installation guide](https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md#installing-from-clawhub).
 
 Try asking:
 

@@ -1,6 +1,6 @@
 # Verification boundary
 
-Review date: 2026-09-02. Status: private development, no Release.
+Review date: 2026-09-03. Distribution: experimental source toolkit; visibility and Release publication require separate approval.
 
 Local review: 8 Python test methods passed; self-tests passed in Windows PowerShell 5.1 and PowerShell 7; the generated synthetic output matched the expected fixture. Both original SVG diagrams were rendered and visually inspected. Skill frontmatter and workflow/issue YAML parsed successfully. Repository and local reachable-history privacy scans reported no configured matches. These are local checks; inspect the current GitHub Actions run for remote CI evidence.
 
@@ -11,13 +11,14 @@ Local review: 8 Python test methods passed; self-tests passed in Windows PowerSh
 | Input scope | One UTF-8 file, maximum 1 MiB; not arbitrary binary logs |
 | Documentation | Local links and SVG structure checked by script |
 | Privacy | Pattern-based text checks; manual review still necessary |
+| Skill installation | Clean local source installed and discovered as eligible on OpenClaw 2026.8.2 in isolated WSL2 state; [acceptance record](ACCEPTANCE.md) |
 | Live Windows / WSL / Telegram | Recipes, not an end-to-end reproduced integration claim |
 
 ## Compatibility and acceptance
 
 Python checks target Python 3.9+. The helper targets Windows PowerShell 5.1 and PowerShell 7. CI exercises synthetic inputs; it does not authenticate to real services.
 
-Before a public release, run both PowerShell variants, review all tracked files and reachable history, and accept a sanitized end-to-end reproduction on a recorded OpenClaw version. Do not publish private setup details as proof.
+Before a public release, re-run both PowerShell variants and review all tracked files and reachable history. Installation/discovery on a recorded version is [now verified](ACCEPTANCE.md); model-driven troubleshooting and service-specific repairs are not end-to-end claims of this toolkit. Reproduce any integration you intend to advertise separately. Do not publish private setup details as proof.
 
 ## Deliberate limitations
 

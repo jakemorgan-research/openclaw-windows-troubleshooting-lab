@@ -41,6 +41,8 @@
 
 先读 [SKILL.md](../SKILL.md)，按首页安装。然后把脱敏后的短案例交给 Agent，要求先定位边界、不修改系统。
 
+已经完成 OpenClaw 2026.8.2 隔离安装与技能识别，以及 Windows PowerShell 5.1 / 7 的离线自检。[验收记录](ACCEPTANCE.md) 提供复现步骤；不代表已经自动修复了所有网络、通道或权限问题。
+
 Issues 中选择 Reproducible problem 或 Beginner feedback。只写系统类别、版本、最小步骤和结果；不提交账号、密钥、完整日志或原始配置。
 
 [工具说明](../examples/README.md) · [验证边界](VERIFICATION.md)
